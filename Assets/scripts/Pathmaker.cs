@@ -21,32 +21,35 @@ public class Pathmaker : MonoBehaviour {
 	private int Counter = 0;
 	public Transform floorPrefab;
 	public Transform pathmakerSpherePrefab;
-
+	public int tileLimit;
+	
 	// you'll have to make a "pathmakerSphere" prefab later
 
 
 	void Update () {
 
 		
-		float randomNumber = Random.Range(0.0f, 1.0f);
+		
+		float randomNumber = Random.Range(0.0f, 5f);
 		
 		Debug.Log("Generated Random Number");
 
 		if (Counter < 150f)
 		{
-			if (randomNumber < 0.25f)
+				
+			if (randomNumber < 1f)
 			{
 				transform.Rotate(0f, 90f, 0f);
 				
 				Debug.Log("1");
 			}
-			else if (0.25f < randomNumber && randomNumber > 0.5f)
+			else if (1f < randomNumber && randomNumber > 3f)
 			{
 				transform.Rotate(0f, -90f, 0f);
 				
 				Debug.Log("2");
 			}
-			else if (0.99f < randomNumber && randomNumber > 1f)
+			else if (4f < randomNumber && randomNumber > 5f)
 			{
 				Instantiate(pathmakerSpherePrefab, this.transform.position , pathmakerSpherePrefab.rotation);
 				
@@ -55,6 +58,8 @@ public class Pathmaker : MonoBehaviour {
 			}
 			
 			Instantiate(floorPrefab, this.transform.position , floorPrefab.rotation);
+			
+			tileLimit++;
 
 			transform.Translate(5f, 0f, 0f);
 
@@ -65,51 +70,15 @@ public class Pathmaker : MonoBehaviour {
 			Destroy(this);
 		}
 
+		if (tileLimit == 500)
+		{
+			Destroy(this);
+		}
 
-
-		
-//		If counter is less than 50, then:
-//			Generate a random number from 0.0f to 1.0f;
-//			If random number is less than 0.25f, then rotate object 90 degrees;
-//				... Else if number is 0.25f-0.5f, then rotate object -90 degrees;
-//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at object current position;
-//			// end elseIf
-
-//			Instantiate a floorPrefab clone at current position;
-//			Move forward ("forward", as in, the direction I'm currently facing) by 5 units;
-//			Increment counter;
-//		Else:
-//			Destroy my game object; 		// self destruct if I've made enough tiles already
 	}
 
 
-} // end of class scope
-
-// MORE STEPS BELOW!!!........
-
-
-
-
-// STEP 3: =====================================================================================
-// implement, test, and stabilize the system
-
-//	IMPLEMENT AND TEST:
-//	- save your scene!!! the code could potentially be infinite / exponential, and crash Unity
-//	- put Pathmaker.cs on a sphere, configure all the prefabs in the Inspector, and test it to make sure it works
-//	STABILIZE: 
-//	- code it so that all the Pathmakers can only spawn a grand total of 500 tiles in the entire world; how would you do that?
-//	- (hint: declare a "public static int" and have each Pathmaker check this "globalTileCount", somewhere in your code? if there are already enough tiles, then maybe the Pathmaker could Destroy my game object
-
-
-
-// STEP 4: ======================================================================================
-// tune your values...
-
-// a. how long should a pathmaker live? etc.
-// b. how would you tune the probabilities to generate lots of long hallways? does it work?
-// c. tweak all the probabilities that you want... what % chance is there for a pathmaker to make a pathmaker? is that too high or too low?
-
-
+} 
 
 // STEP 5: ===================================================================================
 // maybe randomize it even more?

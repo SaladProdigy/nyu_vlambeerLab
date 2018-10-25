@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GroundGenerator.unity
+    guid: 0c4bd4d39868bae4eae2cb07cd814663
+  m_configObjects: {}
