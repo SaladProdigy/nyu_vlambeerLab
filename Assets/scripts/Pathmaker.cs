@@ -27,11 +27,12 @@ public class Pathmaker : MonoBehaviour {
 
 	void Update () {
 
+		
 		float randomNumber = Random.Range(0.0f, 1.0f);
 		
 		Debug.Log("Generated Random Number");
 
-		if (Counter < 50f)
+		if (Counter < 150f)
 		{
 			if (randomNumber < 0.25f)
 			{
@@ -45,7 +46,7 @@ public class Pathmaker : MonoBehaviour {
 				
 				Debug.Log("2");
 			}
-			else if (0.99f < randomNumber && randomNumber > 1.0f)
+			else if (0.99f < randomNumber && randomNumber > 1f)
 			{
 				Instantiate(pathmakerSpherePrefab, this.transform.position , pathmakerSpherePrefab.rotation);
 				
@@ -64,10 +65,6 @@ public class Pathmaker : MonoBehaviour {
 			Destroy(this);
 		}
 
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			
-		}
 
 
 		
@@ -84,6 +81,7 @@ public class Pathmaker : MonoBehaviour {
 //		Else:
 //			Destroy my game object; 		// self destruct if I've made enough tiles already
 	}
+
 
 } // end of class scope
 
