@@ -1,31 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // MAZE PROC GEN LAB
 // all students: complete steps 1-6, as listed in this file
 // optional: if you have extra time, complete the "extra tasks" to do at the very bottom
 
 // STEP 1: ======================================================================================
-// put this script on a Sphere... it will move around, and drop a path of floor tiles behind it
 
+//USAGE:put this script on a Sphere
+//INTENT: it will move around, and drop a path of floor tiles behind it
 public class Pathmaker : MonoBehaviour {
 
 // STEP 2: ============================================================================================
 // translate the pseudocode below
 
 //	DECLARE CLASS MEMBER VARIABLES:
-//	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
-//	Declare a public Transform called floorPrefab, assign the prefab in inspector;
-//	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
+
+	private int Counter = 0;
+	public Transform floorPrefab;
+	public Transform pathmakerSpherePrefab;
+
+	// you'll have to make a "pathmakerSphere" prefab later
 
 
 	void Update () {
+
+		float randomNumber = Random.Range(0.0f, 1.0f);
+		
+		Debug.Log("Generated Random Number");
+
+		if (Counter < 50f)
+		{
+			if (randomNumber < 0.25f)
+			{
+				transform.Rotate(0f, 90f, 0f);
+				
+				Debug.Log("1");
+			}
+			else if (0.25f < randomNumber && randomNumber > 0.5f)
+			{
+				transform.Rotate(0f, -90f, 0f);
+				
+				Debug.Log("2");
+			}
+			else if (0.99f < randomNumber && randomNumber > 1.0f)
+			{
+				Instantiate(pathmakerSpherePrefab, this.transform.position , pathmakerSpherePrefab.rotation);
+				
+				Debug.Log("Instantiate Here");
+				
+			}
+			
+			Instantiate(floorPrefab, this.transform.position , floorPrefab.rotation);
+
+			transform.Translate(5f, 0f, 0f);
+
+			Counter++;
+		}
+		else
+		{
+			Destroy(this);
+		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			
+		}
+
+
+		
 //		If counter is less than 50, then:
 //			Generate a random number from 0.0f to 1.0f;
-//			If random number is less than 0.25f, then rotate myself 90 degrees;
-//				... Else if number is 0.25f-0.5f, then rotate myself -90 degrees;
-//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at my current position;
+//			If random number is less than 0.25f, then rotate object 90 degrees;
+//				... Else if number is 0.25f-0.5f, then rotate object -90 degrees;
+//				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at object current position;
 //			// end elseIf
 
 //			Instantiate a floorPrefab clone at current position;
