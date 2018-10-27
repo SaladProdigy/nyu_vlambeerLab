@@ -19,12 +19,23 @@ public class Pathmaker : MonoBehaviour {
 //	DECLARE CLASS MEMBER VARIABLES:
 
 	private int Counter = 0;
-	public Transform floorPrefab;
+	public GameObject[] floorPrefab;
 	public Transform pathmakerSpherePrefab;
 	public int tileLimit;
 	
+	//2 randomized variables
+	public float randomNumber1;
+	public float randomNumber2;
+	
 	// you'll have to make a "pathmakerSphere" prefab later
+	void Start()
+	{
+		//2 randomized things
+		//replace numbers below with random numbers instead of solid floats
+		randomNumber1 = Random.Range(1f, 2f);
+		randomNumber2 = Random.Range(5f, 10f);
 
+	}
 
 	void Update () {
 
@@ -39,17 +50,17 @@ public class Pathmaker : MonoBehaviour {
 				
 			if (randomNumber < 1f)
 			{
-				transform.Rotate(0f, 90f, 0f);
+				transform.Rotate(0f, 90f, 0f); 
 				
 				Debug.Log("1");
 			}
-			else if (1f < randomNumber && randomNumber > 3f)
+			else if (randomNumber1 < randomNumber && randomNumber > 3f)
 			{
-				transform.Rotate(0f, -90f, 0f);
+				transform.Rotate(0f, -90f, 0f); 
 				
 				Debug.Log("2");
 			}
-			else if (4f < randomNumber && randomNumber > 5f)
+			else if (4f < randomNumber && randomNumber > randomNumber2)
 			{
 				Instantiate(pathmakerSpherePrefab, this.transform.position , pathmakerSpherePrefab.rotation);
 				
@@ -57,7 +68,7 @@ public class Pathmaker : MonoBehaviour {
 				
 			}
 			
-			Instantiate(floorPrefab, this.transform.position , floorPrefab.rotation);
+			Instantiate(floorPrefab[Random.Range(0f, 2f)], this.transform.position , floorPrefab[].rotation);
 			
 			tileLimit++;
 
@@ -79,14 +90,6 @@ public class Pathmaker : MonoBehaviour {
 
 
 } 
-
-// STEP 5: ===================================================================================
-// maybe randomize it even more?
-
-// - randomize 2 more variables in Pathmaker.cs for each different Pathmaker... you would do this in Start()
-// - maybe randomize each pathmaker's lifetime? maybe randomize the probability it will turn right? etc. if there's any number in your code, you can randomize it if you move it into a variable
-
-
 
 // STEP 6:  =====================================================================================
 // art pass, usability pass
